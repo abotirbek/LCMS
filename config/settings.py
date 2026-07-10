@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'employees',
     'finance',
     'students',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -79,9 +80,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "lcms",
+        "USER": "postgres",
+        "PASSWORD": "MILM1234",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -121,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+AUTH_USER_MODEL = "accounts.CustomUser"

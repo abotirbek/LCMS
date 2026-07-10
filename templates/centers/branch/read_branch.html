@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Name: {{ branch.name }}</h3>
+<p>Phone number: {{branch.phone_number}}</p>
+<p>Email: {{branch.email}}</p>
+<p>Address: {{branch.address}}</p>
+<p>City: {{branch.city}}</p>
+<p>District: {{branch.district}}</p>
+<p>Country: {{branch.country}}</p>
+<p>Opening time: {{branch.opening_time}}</p>
+<p>Closing time: {{branch.closing_time}}</p>
+
+{% endblock %}

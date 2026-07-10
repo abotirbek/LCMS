@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Delete Attendance</h3>
+<form method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete attendance #{{ attendance.pk }}?</p>
+  <button type="submit">Delete</button>
+  <a href="{% url 'attendance_list' %}">Cancel</a>
+</form>
+{% endblock %}

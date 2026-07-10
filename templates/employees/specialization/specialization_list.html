@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Specialization List</h3>
+<a href="{% url 'create_specialization' %}">Create Specialization</a>
+<ul>
+  {% for specialization in specializations %}
+  <li>
+    <a href="{% url 'read_specialization' specialization.pk %}">{{ specialization.name }}</a>
+    <a href="{% url 'update_specialization' specialization.pk %}">Edit</a>
+    <a href="{% url 'delete_specialization' specialization.pk %}">Delete</a>
+  </li>
+  {% empty %}
+  <li>No specializations found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

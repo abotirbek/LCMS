@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Payment Details</h3>
+<p><strong>Payment ID:</strong> {{ payment.pk }}</p>
+<p><strong>Amount:</strong> {{ payment.amount }}</p>
+<p><strong>Method:</strong> {{ payment.method }}</p>
+<a href="{% url 'payment_list' %}">Back to list</a>
+<a href="{% url 'update_payment' payment.pk %}">Edit</a>
+<a href="{% url 'delete_payment' payment.pk %}">Delete</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Course List</h3>
+{% for c in course %}
+  {{ c.name }}
+<hr>
+
+{% endblock %}

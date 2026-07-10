@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Invoice List</h3>
+<a href="{% url 'create_invoice' %}">Create Invoice</a>
+<ul>
+  {% for invoice in invoices %}
+  <li>
+    <a href="{% url 'read_invoice' invoice.pk %}">Invoice #{{ invoice.pk }}</a>
+    <a href="{% url 'update_invoice' invoice.pk %}">Edit</a>
+    <a href="{% url 'delete_invoice' invoice.pk %}">Delete</a>
+  </li>
+  {% empty %}
+  <li>No invoices found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

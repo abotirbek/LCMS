@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Specialization Details</h3>
+<p><strong>Name:</strong> {{ specialization.name }}</p>
+<a href="{% url 'specialization_list' %}">Back to list</a>
+<a href="{% url 'update_specialization' specialization.pk %}">Edit</a>
+<a href="{% url 'delete_specialization' specialization.pk %}">Delete</a>
+{% endblock %}

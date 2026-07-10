@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Department List</h3>
+<a href="{% url 'create_department' %}">Create Department</a>
+<ul>
+  {% for department in departments %}
+  <li>
+    <a href="{% url 'read_department' department.pk %}">{{ department.name }}</a>
+    <a href="{% url 'update_department' department.pk %}">Edit</a>
+    <a href="{% url 'delete_department' department.pk %}">Delete</a>
+  </li>
+  {% empty %}
+  <li>No departments found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

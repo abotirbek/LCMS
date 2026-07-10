@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Delete Specialization</h3>
+<form method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete "{{ specialization.name }}"?</p>
+  <button type="submit">Delete</button>
+  <a href="{% url 'specialization_list' %}">Cancel</a>
+</form>
+{% endblock %}

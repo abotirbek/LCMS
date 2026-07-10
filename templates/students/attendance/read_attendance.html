@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Attendance Details</h3>
+<p><strong>Attendance ID:</strong> {{ attendance.pk }}</p>
+<p><strong>Status:</strong> {{ attendance.status }}</p>
+<a href="{% url 'attendance_list' %}">Back to list</a>
+<a href="{% url 'update_attendance' attendance.pk %}">Edit</a>
+<a href="{% url 'delete_attendance' attendance.pk %}">Delete</a>
+{% endblock %}

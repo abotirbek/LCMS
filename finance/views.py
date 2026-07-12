@@ -34,7 +34,7 @@ def update_invoice(request, pk):
             return redirect('invoice_list')
     else:
         form = InvoiceForm(instance=invoice)
-    return render(request, 'finance/invoice/create_invoice.html', {'form': form})
+    return render(request, 'finance/invoice/update_invoice.html', {'form': form})
 
 
 def delete_invoice(request, pk):
@@ -76,7 +76,7 @@ def update_payment_invoice(request, pk):
             return redirect('payment_invoice_list')
     else:
         form = PaymentInvoiceForm(instance=payment_invoice)
-    return render(request, 'finance/payment_invoice/create_payment_invoice.html', {'form': form})
+    return render(request, 'finance/payment_invoice/update_payment_invoice.html', {'form': form})
 
 
 def delete_payment_invoice(request, pk):
@@ -118,7 +118,7 @@ def update_payment(request, pk):
             return redirect('payment_list')
     else:
         form = PaymentForm(instance=payment)
-    return render(request, 'finance/payment/create_payment.html', {'form': form})
+    return render(request, 'finance/payment/update_payment.html', {'form': form})
 
 
 def delete_payment(request, pk):

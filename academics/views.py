@@ -31,7 +31,7 @@ def update_course(request, pk):
             return redirect('course_list')
     else:
         form = CourseForm(instance=course)
-    return render(request, 'academics/course/create_course.html', {'form': form})
+    return render(request, 'academics/course/update_course.html', {'form': form})
 
 def delete_course(request, pk):
     course = get_object_or_404(Course, pk=pk)
@@ -70,7 +70,7 @@ def update_group(request, pk):
             return redirect('group_list')
     else:
         form = GroupForm(instance=group)
-    return render(request, 'academics/group/create_group.html', {'form': form})
+    return render(request, 'academics/group/update_group.html', {'form': form})
 
 def delete_group(request, pk):
     group = get_object_or_404(Group, pk=pk)

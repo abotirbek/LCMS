@@ -22,15 +22,21 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
-        ("admin", "Admin"),
-        ("manager", "Manager"),
-        ("student", "Student"),
+        ('ceo', 'CEO'),
+        ("branch_director", "Branch Director"),
+        ("academic_manager", "Academic Manager"),
+        ("hr_manager", "HR Manager"),
+        ("receptionist", "Receptionist"),
         ("teacher", "Teacher"),
+        ("accountant", "Accountant"),
+        ("student", "Student"),
+        ("parent", "Parent"),
+        ("system_administrator", "System Administrator"),
     )
     phone_number = models.CharField(max_length=16, unique=True)
     full_name = models.CharField(max_length=50)
     birth_date = models.DateField()
-    role = models.CharField(max_length=7, choices=ROLE_CHOICES, default="student",)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student",)
     is_student = models.BooleanField(default=True)
     # Required by Django
     is_active = models.BooleanField(default=True)

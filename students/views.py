@@ -31,7 +31,7 @@ def update_student(request, pk):
             return redirect('student_list')
     else:
         form = StudentForm(instance=student)
-    return render(request, 'students/student/create_student.html', {'form': form})
+    return render(request, 'students/student/update_student.html', {'form': form})
 
 def delete_student(request, pk):
     student = get_object_or_404(Student, pk=pk)
@@ -68,7 +68,7 @@ def update_enrollment(request, pk):
             return redirect('enrollment_list')
     else:
         form = EnrollmentForm(instance=enrollment)
-    return render(request, 'students/enrollment/create_enrollment.html', {'form': form})
+    return render(request, 'students/enrollment/update_enrollment.html', {'form': form})
 
 def delete_enrollment(request, pk):
     enrollment = get_object_or_404(Enrollment, pk=pk)
@@ -105,7 +105,7 @@ def update_attendance(request, pk):
             return redirect('attendance_list')
     else:
         form = AttendanceForm(instance=attendance)
-    return render(request, 'students/attendance/create_attendance.html', {'form': form})
+    return render(request, 'students/attendance/update_attendance.html', {'form': form})
 
 def delete_attendance(request, pk):
     attendance = get_object_or_404(Attendance, pk=pk)

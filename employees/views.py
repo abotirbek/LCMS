@@ -30,7 +30,7 @@ def update_department(request, pk):
             return redirect('department_list')
     else:
         form = DepartmentForm(instance=department)
-    return render(request, 'employees/department/create_department.html', {'form': form})
+    return render(request, 'employees/department/update_department.html', {'form': form})
 
 def delete_department(request, pk):
     department = get_object_or_404(Department, pk=pk)
@@ -71,7 +71,7 @@ def update_specialization(request, pk):
             return redirect('specialization_list')
     else:
         form = SpecializationForm(instance=specialization)
-    return render(request, 'employees/specialization/create_specialization.html', {'form': form})
+    return render(request, 'employees/specialization/update_specialization.html', {'form': form})
 
 
 def delete_specialization(request, pk):
@@ -113,7 +113,7 @@ def update_employee(request, pk):
             return redirect('employee_list')
     else:
         form = EmployeeForm(instance=employee)
-    return render(request, 'employees/employee/create_employee.html', {'form': form})
+    return render(request, 'employees/employee/update_employee.html', {'form': form})
 
 
 def delete_employee(request, pk):

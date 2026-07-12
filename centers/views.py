@@ -31,7 +31,7 @@ def update_center(request, pk):
             return redirect('center_list')
     else:
         form = CenterForm(instance=center)
-    return render(request, 'centers/center/create_center.html', {'form': form})
+    return render(request, 'centers/center/update_center.html', {'form': form})
 
 def delete_center(request, pk):
     center = get_object_or_404(Center, pk=pk)
@@ -70,7 +70,7 @@ def update_branch(request, pk):
             return redirect('branch_list')
     else:
         form = BranchForm(instance=branch)
-    return render(request, 'centers/branch/create_branch.html', {'form': form})
+    return render(request, 'centers/branch/update_branch.html', {'form': form})
 
 def delete_branch(request, pk):
     branch = get_object_or_404(Branch, pk=pk)
@@ -109,7 +109,7 @@ def update_room(request, pk):
             return redirect('room_list')
     else:
         form = RoomForm(instance=room)
-    return render(request, 'centers/room/create_room.html', {'form': form})
+    return render(request, 'centers/room/update_room.html', {'form': form})
 
 def delete_room(request, pk):
     room = get_object_or_404(Room, pk=pk)

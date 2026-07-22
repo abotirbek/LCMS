@@ -1,55 +1,68 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-class CustomUserManager(BaseUserManager):
-    def create_user(self, phone_number, password=None, **extra_fields):
-        if not phone_number:
-            raise ValueError("Phone number is required.")
-        user = self.model(phone_number=phone_number, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+class TimeStamped(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    def create_superuser(self, phone_number, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("is_active", True)
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError("Superuser must have is_staff=True.")
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
-        return self.create_user(phone_number, password, **extra_fields)
+    class Meta:
+        abstract = True
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    ROLE_CHOICES = (
-        ('ceo', 'CEO'),
-        ("branch_director", "Branch Director"),
-        ("academic_manager", "Academic Manager"),
-        ("hr_manager", "HR Manager"),
-        ("receptionist", "Receptionist"),
-        ("teacher", "Teacher"),
-        ("accountant", "Accountant"),
-        ("student", "Student"),
-        ("parent", "Parent"),
-        ("system_administrator", "System Administrator"),
-    )
+class CustomUser(AbstractUser):
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
     phone_number = models.CharField(max_length=16, unique=True)
-    full_name = models.CharField(max_length=50)
-    birth_date = models.DateField()
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student",)
-    is_student = models.BooleanField(default=True)
-    # Required by Django
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    objects = CustomUserManager()
+    email = models.EmailField(max_length=100, unique=True, blank=True, null=True)
+    telegram_username = models.CharField(max_length=50, blank=True)
+    birth_date = models.DateField(blank=True, null=True)
 
-    USERNAME_FIELD = "phone_number"
-    REQUIRED_FIELDS = []
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
-        return self.full_name
+        return f"{self.first_name} {self.last_name}".strip() or self.phone_number
 
-class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
-    bio = models.TextField(blank=True)
+class Specialization(TimeStamped):
+    name = models.CharField(max_length=50, help_text='e.g. English Teacher')
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Department(TimeStamped):
+    name = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Teacher(TimeStamped):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='teacher')
+    specialization = models.ForeignKey(Specialization, on_delete=models.CASCADE, related_name='specialization')
+    experience = models.TextField()
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    qualification = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name} (teacher)"
+
+
+class Employee(TimeStamped):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='employee')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='department')
+    experience = models.TextField()
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    qualification = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name} (employee)"
+
+
+class Student(TimeStamped):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='student')
+    parent_contact = models.CharField(max_length=16)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name} (student)"

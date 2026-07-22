@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Employee Details</h3>
+<p><strong>Name:</strong> {{ employee.user.get_full_name }}</p>
+<p><strong>Department:</strong> {{ employee.department }}</p>
+<p><strong>Experience:</strong> {{ employee.experience }}</p>
+<p><strong>Salary:</strong> {{ employee.salary }}</p>
+<p><strong>Qualification:</strong> {{ employee.qualification }}</p>
+<a href="{% url 'employee_list' %}">Back</a>
+{% endblock %}
